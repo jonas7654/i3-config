@@ -100,13 +100,13 @@ bindsym $mod+a focus parent
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 
 set $ws2 
-set $ws3 
-set $ws4 
-set $ws5 
+set $ws3 
+set $ws4 4
+set $ws5 5
 set $ws6 6
 set $ws7 7
-set $ws8 8
-set $ws9 9 
+set $ws8 
+set $ws9  
 set $ws10 
 
 # switch to workspace
@@ -138,11 +138,12 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 for_window [class="Spotify"] move to workspace $ws10
 assign [class="Alacritty"] $ws1
 assign [class="Firefox"] $ws2
-assign [class="vlc"] $ws7	
-
+assign [class="Thunderbird"] $ws8
+assign [class="Nautilus"] $ws3
+assign [class="vlc"] $ws9
 
 #LOCK
-bindsym $mod+x exec betterlockscreen -l blur
+bindsym $mod+x exec betterlockscreen -l dim -t
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -186,13 +187,14 @@ bindsym $mod+r mode "resize"
 exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.3
 exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
 exec setxkbmap de
-exec_always feh --bg-scale ~/Pictures/Wallpaper/nice.jpg
+exec_always feh --bg-scale ~/Pictures/Wallpaper/amazing-blur-breathtaking-1903702.jpg
 focus_follows_mouse no
 
 #compositor
-exec_always --no-startup-id compton -b --config ~/.config/compton/compton.conf
+exec_always --no-startup-id picom -b --config ~/.config/picom/picom.conf
 
 #Audio controls
+exec amixer -q set Master 0
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
@@ -202,15 +204,17 @@ bindsym XF86MonBrightnessUp exec light -A 2 #increase
 bindsym XF86MonBrightnessDown exec light -U 2 #decrease
 
 #i3-gaps
-gaps inner 15
-gaps outer 15
+workspace $ws1 gaps outer 10
+workspace $ws1 gaps inner 10
 #smart_gaps on
 smart_borders on
-workspace $ws2 gaps outer 0
-workspace $ws2 gaps inner 10
+#workspace $ws2 gaps outer 0
+#workspace $ws2 gaps inner 10
 
 #custom bindings
 bindsym $mod+Tab workspace back_and_forth
+bindsym XF86Tools exec alacritty -e vim ~/.config/i3/config
+bindsym $mod+Shift+Print exec gnome-screenshot
 
 
 #coloring
@@ -219,17 +223,17 @@ client.focused_inactive #0d1010 #212121 #d9d9d9 #0d1010 #063340
 client.unfocused        #0d1010 #212121 #d9d9d9 #424242 #063340                                                                            
 client.focused          #eee8d5 #cecece #000000 #eee8d5 #eee8d5
 
-#autostart
-exec --no-startup-id termite
-exec --no-startup-id spotify
-exec --no-startup-id xfce4-power-manager
 
+#autostart
+exec --no-startup-id alacritty -e htop
+exec --no-startup-id nautilus
+exec --no-startup-id spotify --force-device-scale-factor=1.4 %U
+exec --no-startup-id xfce4-power-manager
 
 for_window [class=".*"] border pixel 3
 
 #polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-
 
 
 
