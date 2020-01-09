@@ -1,6 +1,5 @@
 Xft.dpi: 120
 
-
 *foreground = ${xrdb:color7}
 *background = ${xrdb:color2}
 
