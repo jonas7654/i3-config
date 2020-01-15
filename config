@@ -105,19 +105,19 @@ set $ws4 4
 set $ws5 5
 set $ws6 6
 set $ws7 7
-set $ws8 
+set $ws8 
 set $ws9  
 set $ws10 
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
+bindsym $mod+1 workspace $ws1;
 bindsym $mod+2 workspace $ws2; exec [ $(ps h -C firefox | grep -v "autohide" | wc -l) = 0 ] && /usr/bin/firefox
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
+bindsym $mod+8 workspace $ws8; layout tabbed
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
@@ -141,6 +141,12 @@ assign [class="firefox"] $ws2
 assign [class="Thunderbird"] $ws8
 assign [class="Nautilus"] $ws3
 assign [class="vlc"] $ws9
+assign [class="Signal"] $ws8
+assign [class="discord"] $ws8
+assign [class="ProtonMail Bridge"] $ws8
+assign [class="whats-app-nativefier-d52542"] $ws8
+for_window [class=".*"] border pixel 3
+for_window [class="Gnome-calculator"] floating enable
 
 #LOCK
 bindsym $mod+x exec betterlockscreen -l dim -t
@@ -199,8 +205,8 @@ exec amixer -q set Master 0
 #bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 #bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
 #bindsym XF86AudioMute exec amixer -q set Master toggle
-bindsym XF86AudioRaiseVolume exec pamixer -u -i 2
-bindsym XF86AudioLowerVolume exec pamixer -u -d 2
+bindsym XF86AudioRaiseVolume exec pamixer -u -i 5
+bindsym XF86AudioLowerVolume exec pamixer -u -d 5
 bindsym XF86AudioMute exec pamixer -t
 
 # Sreen brightness controls
@@ -231,17 +237,13 @@ client.focused          #eee8d5 #cecece #000000 #eee8d5 #eee8d5
 #autostart
 #exec --no-startup-id alacritty -e htop
 exec --no-startup-id nautilus
-exec --no-startup-id spotify --force-device-scale-factor=1.4 %U
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id redshift
+exec --no-startup-id thunderbird
+exec --no-startup-id signal-desktop
+#exec --no-startup-id discord
+exec --no-startup-id protonmail-bridge
 
 
-for_window [class=".*"] border pixel 3
-for_window [class="Gnome-calculator"] floating enable
-
-#polybar
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-
-
+exec_always /home/jonas/.config/polybar/launch.sh
 
 
