@@ -24,5 +24,4 @@ Fonts to install (copy the .ttf files to ~/.fonts):
 
     Awesome (https://github.com/FortAwesome/Font-Awesome), for the special cute icons
     Yosemite San Francisco (https://github.com/supermarin/YosemiteSanFranciscoFont), to set as system font with lxappearance. Note: shows up as SFNS Display on lxappearance.
-        Pro tip: use gnome-font-viewer to view all available fonts
 
