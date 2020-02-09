@@ -61,8 +61,8 @@ font-3 = FontAwesome5Free Solid:pixelsize=12:antialias=true;0
 font-4 = FontAwesome5Brands:size=12:antialias=true;0
 
 modules-left = i3
-#modules-center = spotify 
-modules-right = spotify alsa cpu memory filesystem wlan battery date
+#modules-center =  
+modules-right = spotify pulseaudio cpu memory filesystem wlan battery openweathermap-simple date
 
 tray-position = right
 tray-padding = 2
@@ -188,7 +188,7 @@ type = internal/network
 interface = wlp1s0
 interval = 3.0
 
-format-connected = <label-connected>
+format-connected =<label-connected>
 #format-connected-underline = ${colors.underline}
 label-connected = %essid%
 format-connected-prefix = " "
@@ -223,7 +223,6 @@ interval = 5
 
 date = %d-%m-%Y%
 
-
 time = %H:%M
 
 #format-underline = ${colors.underline} 
@@ -254,6 +253,30 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+format-volume = <ramp-volume> <label-volume>
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+label-muted =  muted
+
+click-right = pavucontrol 
 
 [module/battery]
 type = internal/battery
@@ -354,5 +377,24 @@ screenchange-reload = true
 [global/wm]
 margin-top = 0 
 margin-bottom = 5
+
+[module/title-xmonad]
+type = custom/script
+exec = tail -F /tmp/.xmonad-title-log
+exec-if = [ -p /tmp/.xmonad-title-log ]
+tail = true
+
+[module/openweathermap-simple]
+type = custom/script
+exec = ~/.config/polybar/scripts/openweathermap-simple.sh
+interval = 600
+label-font = 3
+
+
+[module/vpn-wireguard-wg]
+type = custom/script
+exec = ~/.config/polybar/scripts/vpn-wireguard-wg.sh
+interval = 5
+click-left = ~/polybar-scripts//vpn-wireguard-wg.sh --toggle &
 
 ; vim:ft=dosini
