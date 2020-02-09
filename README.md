@@ -19,6 +19,7 @@ Packages to install:
     imagemagick, to get the convert(1) command
     pavucontrol for setting and fetching the volume level. i3blocks relies on pulse audio to get the correct volume level
     betterscreenlock for better screenlocking 
+    jq for weather widget
 
 Fonts to install (copy the .ttf files to ~/.fonts):
 
