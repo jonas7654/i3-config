@@ -26,7 +26,7 @@ get_icon() {
 
 
 
-KEY="6b6f31931fea1532ed21588c7d9252c4"
+KEY=""
 CITY=""
 UNITS="metric"
 SYMBOL="°"
